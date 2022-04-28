@@ -14,7 +14,7 @@ body {
 
 h1 {
   font-size: 4em;
-  background-color: blue;
+
 }
 
 h2 {
@@ -30,13 +30,13 @@ pli {
 /* header and footer */
 
 header, footer {
-  background-colour: teal;
+  background-color: teal;
   height: 10em;
   padding: 2em;
 }
 
 h1, footer p {
-  margin: -70px;
+  margin: 0px;
 }
 
 h1 {
@@ -55,6 +55,6 @@ main p, main li {
 }
 
 img {
-  float: right
-  margin: 1.2em 2em;
+  float: right;
+  margin: 0em;
 }
