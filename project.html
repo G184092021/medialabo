@@ -3,12 +3,60 @@
   <head>
     <meta charset="utf-8">
     <title>グルメ情報</title>
+    <link rel="stylesheet" href="project-style-style.css">
   </head>
 
   <body>
 
     <h1>グルメ情報</h1>
 
-    <p>Welcome to my exciting homepage</p>
+    <form action="cgi-bin/example.cgi" method="post">
+      <p>検索したいキーワードを入力してください。</p>
+      <input type="search" name="search" placeholder="キーワードを入力">
+      <input type="submit" name="submit" value="検索">
+    </form>
+
+    <table>
+      <ab>
+        <th>項目名</th>
+        <th>項目の説明</th>
+      <tr>
+        <td>access</td>
+        <td>アクセス情報</td>
+      </tr>
+      <tr>
+        <td>address</td>
+        <td>住所</td>
+      </tr>
+      <tr>
+        <td>budget.name</td>
+        <td>予算</td>
+      </tr>
+      <tr>
+        <td>catch</td>
+        <td>キャッチコピー</td>
+      </tr>
+      <tr>
+        <td>genre.name</td>
+        <td>ジャンル</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>店舗名</td>        
+      </tr>
+      <tr>
+        <td>open</td>
+        <td>営業日時</td>
+      </tr>
+      <tr>
+        <td>station_name</td>
+        <td>最寄り駅</td>
+      </tr>
+      <tr>
+        <td>subgenre.name</td>
+        <td>サブジャンルの名前</td>
+      </tr>
+    </table>
+
   </body>
 </html>
