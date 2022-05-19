@@ -11,7 +11,7 @@ li = document.createElement('li');
 li.textContent = 'ヨーロッパ大陸';
 ul.insertAdjacentElement('beforeend', li);
 
-let h2sevenOcean = document.querySelector('h2#aboutOcean');
+let h2sevenOcean = document.querySelector('h2#sevenOcean');
 
 // 7大洋　の名前を配列に代入
 let oceans = [
@@ -28,11 +28,12 @@ let oceans = [
 ul = document.createElement('ul'); 
 
 // ul 要素を h2sevenOcean の次に追加する（次の行を書く）
-
+h2sevenOcean.insertAdjacentElement('afterend',ul);
 
 // ul に7つの大陸を追加する
 for (let o of oceans) {
-    li.textContent = oceans[o];
+  let li = document.createElement('li');
+    li.textContent = o;
     ul.insertAdjacentElement('beforeend', li);
 }
 

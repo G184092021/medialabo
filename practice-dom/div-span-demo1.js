@@ -1,5 +1,5 @@
-let face = "jiro.png";
-let name = "高尾二郎";
+let face = "hanako.png";
+let name = "茗荷谷花子";
 
 // img 要素を作成
 let img = document.createElement('img');
