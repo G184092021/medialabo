@@ -1,56 +1,46 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var contentsList = document.getElementById('toc'); // 目次を追加する先(table of contents)
-    var div = document.createElement('div'); // 作成する目次のコンテナ要素
-
-    // .entry-content配下のh2、h3要素を全て取得する
-    var matches = document.querySelectorAll('.entry-content h2, .entry-content h3');
-
-    // 取得した見出しタグ要素の数だけ以下の操作を繰り返す
-    matches.forEach(function (value, i) {
-        // 見出しタグ要素のidを取得し空の場合は内容をidにする
-        var id = value.id;
-        if(id === '') {
-            id = value.textContent;
-            value.id = id;
-        }
-
-        // 要素がh2タグの場合
-        if(value.tagName === 'H2') {
-            var ul = document.createElement('ul');
-            var li = document.createElement('li');
-            var a = document.createElement('a');
-
-            // 追加する<ul><li><a>タイトル</a></li></ul>を準備する
-            a.innerHTML = value.textContent;
-            a.href = '#' + value.id;
-            li.appendChild(a)
-            ul.appendChild(li);
-
-            // コンテナ要素である<div>の中に要素を追加する
-            div.appendChild(ul);
-        }
-
-        // 要素がh3タグの場合
-        if(value.tagName === 'H3') {
-            var ul = document.createElement('ul');
-            var li = document.createElement('li');
-            var a = document.createElement('a');
-
-            // コンテナ要素である<div>の中から最後の<li>を取得する。
-            var lastUl = div.lastElementChild;
-            var lastLi = lastUl.lastElementChild;
-
-            // 追加する<ul><li><a>タイトル</a></li></ul>を準備する
-            a.innerHTML = value.textContent;
-            a.href = '#' + value.id;
-            li.appendChild(a)
-            ul.appendChild(li);
-
-            // 最後の<li>の中に要素を追加する
-            lastLi.appendChild(ul);
-        }
-    });
-
-    // 最後に画面にレンダリング
-    contentsList.appendChild(div);
-});
+  const TOC_INSERT_SELECTOR = '#toc';              // [セレクター指定] 目次を挿入する要素 querySelector用
+  const HEADING_SELECTOR    = 'h1,h2,h3,h4,h5,h6'; // [セレクター指定] 収集する見出し要素 querySelectorAll用
+  const LINK_CLASS_NAME     = 'tocLink';           // [クラス名] 目次用aタグに追加するクラス名     .無し
+  const ID_NAME             = 'heading';           // [ID名]    目次に追加するID名のプレフィックス #無し
+  const tocInsertElement    = document.querySelector(TOC_INSERT_SELECTOR);
+  const headingElements     = document.querySelectorAll(HEADING_SELECTOR);
+  const layer = [];
+  let id = 0;
+  const uid   = () =>`${ID_NAME}${id++}`;
+  let oldRank = -1;
+  try {
+    const createLink = (el) => {
+      let li = document.createElement('li');
+      let a  = document.createElement('a');
+      el.id  = el.id || uid();
+      a.href = `#${el.id}`;
+      a.innerText = el.innerText;
+      a.className = LINK_CLASS_NAME;
+      li.appendChild(a);
+      return li;
+    };
+    const findParentElement = (layer, rank, diff) => {
+      do {
+          rank += diff;
+          if (layer[rank]) return layer[rank];
+      } while (0 < rank && rank < 7);
+      return false;
+    };
+    const appendToc = (el, toc) => {
+      el.appendChild(toc.cloneNode(true));
+    };
+    headingElements.forEach( (el) => {
+      let rank   = Number(el.tagName.substring(1));
+      let parent = findParentElement(layer, rank, -1);
+      if (oldRank > rank) layer.length = rank + 1;
+      if (!layer[rank]) {
+          layer[rank] = document.createElement('ol');
+          if (parent.lastChild) parent.lastChild.appendChild(layer[rank]);
+      }
+      layer[rank].appendChild(createLink(el));
+      oldRank = rank;
+  });
+  if (layer.length) appendToc(tocInsertElement, findParentElement(layer, 0, 1));
+  } catch (e) {
+    //error
+  }
