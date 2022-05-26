@@ -44,3 +44,11 @@
   } catch (e) {
     //error
   }
+
+  
+
+jQuery(".container").raindrops({
+  color: "orangered",
+  canvasHeight: 300
+});
+

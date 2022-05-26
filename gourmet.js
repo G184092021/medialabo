@@ -199,6 +199,30 @@ let data = {
   }
 };
 
+
+
+const CLASSNAME = "-visible";
+const TIMEOUT = 1500;
+const $target = $(".title");
+
+setInterval(() => {
+  $target.addClass(CLASSNAME);
+  setTimeout(() => {
+    $target.removeClass(CLASSNAME);
+  }, TIMEOUT);
+}, TIMEOUT * 2);
+
+
+
+//検索
+let b = document.querySelector('#print');
+b.addEventListener('click', kensaku);
+
+function kensaku(){
+  let i = document.querySelector('input[name="serch"]');
+	let serch = i.value;
+}
+
 /////////// 課題3-2 ここからプログラムを書こう
 for(let n of data.results.shop){
   console.log(n.name);
