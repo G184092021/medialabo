@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(182, 221, 240);
+}
+
+h1 {
+    position: relative;
+    padding: 1rem 2rem calc(1rem + 10px);
+    background: rgb(98, 169, 231);
+    text-align: center;
+  }
