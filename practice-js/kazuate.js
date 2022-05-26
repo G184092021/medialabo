@@ -13,11 +13,9 @@ b.addEventListener('click', hantei);
 function hantei() {
     let i = document.querySelector('input[name="num"]');
 	let num = i.value;
-    let yoso = num;       // 第5回課題:テキストボックスの数値をここに代入
+    let yoso = Math.floor(num);       // 第5回課題:テキストボックスの数値をここに代入
     
 
-
-    while(kaisu == 100){
         let pre = (kaisu + "回目の予想: " + yoso);
         let s = document.querySelector('span#pre');
         s.textContent = pre;
@@ -40,6 +38,6 @@ function hantei() {
         }
         let d = document.querySelector('span#ans');
         d.textContent = ans;
-    }
+        kaisu++;
     
 }
