@@ -227,3 +227,61 @@ function kensaku(){
 for(let n of data.results.shop){
   console.log(n.name);
 }
+
+//検索結果の表示
+let c = document.querySelector('#sendRequest');
+c.addEventListener('click',sendRespect);
+
+let z = 0;
+//通信を開始する処理
+function sendRespect(){
+  for(let i = 0;i < z;i++){
+      let element = document.querySelector('p');
+      element.remove();
+  }
+  z = 0;
+
+  let e = document.querySelector('input[name = "number"]');
+  let key = e.value;
+  let url = 'https;//www.nisita-lab.org/web-contens/jsons.hotopepper/' + key + '.json';
+
+  //通信開始
+  axios.get(url)
+  .then(showResult)
+  .catch(showError)
+  .then(finish)
+}
+let ta = document.querySelector('table');
+
+//通信が成功した時の処理
+function showResult(resp){
+  //サーバから送られてきたデータを出力
+  let data = resp.data;
+
+  //dataが文字列ならオブジェクトに変換する
+  if(typeof data == 'string'){
+      data = JSON,parse(data);
+  }
+
+  //dataをコンソールに出力
+  console.log(data);
+
+  //data.xを出力
+  for(let n of data.results.shop){
+      console.log(n.name);
+      let p = document.createElement('p');
+      p.textContent = n.name;
+      ta.insertAdjacentElement('afterend',p);
+      z++;
+  }
+}
+
+//通信エラーが発生した時の処理
+function showError(err){
+  console.log(err);
+}
+
+//通信の最後に毎回実行する処理
+function finish(){
+  console.log('Ajax通信が終わりました');
+}
