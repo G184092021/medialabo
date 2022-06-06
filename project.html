@@ -4,52 +4,18 @@
     <meta charset="utf-8">
     <title>グルメ情報</title>
     <link rel="stylesheet" href="project-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
     <script src="gourmet.js" defer></script>
   </head>
 
   <body>
+    <!-- put navigation menu just below here -->
 
     <h1>グルメ情報</h1>
 
     <h3>ジャンルを選択する</h3>
-    <p>
-      <input type="checkbox" name="居酒屋" id="G001" value="G001">
-      <label for="G001">居酒屋</label>
-      <input type="checkbox" name="ダイニングバー・バル" id="G002" value="G002">
-      <label for="G002">ダイニングバー・バル</label>
-      <input type="checkbox" name="創作料理" id="G003" value="G003">
-      <label for="G003">創作料理</label>
-      <input type="checkbox" name="和食" id="G004" value="G004">
-      <label for="G004">和食</label>
-      <input type="checkbox" name="洋食" id="G005" value="G005">
-      <label for="G005">洋食</label>
-      <input type="checkbox" name="イタリアン・フレンチ" id="G006" value="G006">
-      <label for="G006">イタリアン・フレンチ</label>
-      <input type="checkbox" name="中華" id="G007" value="G007">
-      <label for="G007">中華</label>
-      <input type="checkbox" name="焼肉・ホルモン" id="G008" value="G008">
-      <label for="G008">焼肉・ホルモン</label>
-      <input type="checkbox" name="アジア・エスニック料理" id="G009" value="G009">
-      <label for="G009">アジア・エスニック料理</label>
-      <input type="checkbox" name="各国料理" id="G010" value="G010">
-      <label for="G010">各国料理</label>
-      <input type="checkbox" name="カラオケ・パーティ" id="G011" value="G011">
-      <label for="G011">カラオケ・パーティ</label>
-      <input type="checkbox" name="バー・カクテル" id="G012" value="G012">
-      <label for="G012">バー・カクテル</label>
-      <input type="checkbox" name="ラーメン" id="G013" value="G013">
-      <label for="G013">ラーメン</label>
-      <input type="checkbox" name="カフェ・スイーツ" id="G014" value="G014">
-      <label for="G014">カフェ・スイーツ</label>
-      <input type="checkbox" name="その他グルメ" id="G015" value="G015">
-      <label for="G015">その他グルメ</label>
-      <input type="checkbox" name="お好み焼き・もんじゃ" id="G016" value="G016">
-      <label for="G016">お好み焼き・もんじゃ</label>
-      <input type="checkbox" name="韓国料理" id="G017" value="G017">
-      <label for="G017">韓国料理</label>
-
-      <p><button id="answer">回答する</button></p>
-    </p>
+    <input type="sendRequest" name="number" size="10">
+    <button id="sendRequest">検索</button>
 
     <table>
       <ab>
@@ -93,5 +59,6 @@
       </tr>
     </table>
 
+    <p id="access"><span id ="x"></span></p>
   </body>
 </html>

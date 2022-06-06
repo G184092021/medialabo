@@ -199,42 +199,13 @@ let data = {
   }
 };
 
-
-
-const CLASSNAME = "-visible";
-const TIMEOUT = 1500;
-const $target = $(".title");
-
-setInterval(() => {
-  $target.addClass(CLASSNAME);
-  setTimeout(() => {
-    $target.removeClass(CLASSNAME);
-  }, TIMEOUT);
-}, TIMEOUT * 2);
-
-
-
-//検索
-let b = document.querySelector('#print');
-b.addEventListener('click', kensaku);
-
-function kensaku(){
-  let i = document.querySelector('input[name="serch"]');
-	let serch = i.value;
-}
-
-/////////// 課題3-2 ここからプログラムを書こう
-for(let n of data.results.shop){
-  console.log(n.name);
-}
-
 //検索結果の表示
-let c = document.querySelector('#sendRequest');
-c.addEventListener('click',sendRespect);
+let b = document.querySelector('#sendRequest');
+b.addEventListener('click',sendRequest);
 
 let z = 0;
 //通信を開始する処理
-function sendRespect(){
+function sendRequest(){
   for(let i = 0;i < z;i++){
       let element = document.querySelector('p');
       element.remove();
@@ -243,7 +214,7 @@ function sendRespect(){
 
   let e = document.querySelector('input[name = "number"]');
   let key = e.value;
-  let url = 'https;//www.nisita-lab.org/web-contens/jsons.hotopepper/' + key + '.json';
+  let url = 'https://www.nishita-lab.org/web-contents/jsons/hotpepper/'+key+'.json';
 
   //通信開始
   axios.get(url)
@@ -260,7 +231,7 @@ function showResult(resp){
 
   //dataが文字列ならオブジェクトに変換する
   if(typeof data == 'string'){
-      data = JSON,parse(data);
+      data = JSON.parse(data);
   }
 
   //dataをコンソールに出力
