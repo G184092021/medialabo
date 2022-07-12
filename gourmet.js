@@ -199,31 +199,60 @@ let data = {
   }
 };
 
+//検索結果の表示
+let b = document.querySelector('#sendRequest');
+b.addEventListener('click',sendRequest);
 
+let z = 0;
+//通信を開始する処理
+function sendRequest(){
+  for(let i = 0;i < z;i++){
+      let element = document.querySelector('p');
+      element.remove();
+  }
+  z = 0;
 
-const CLASSNAME = "-visible";
-const TIMEOUT = 1500;
-const $target = $(".title");
+  let e = document.querySelector('input[name = "number"]');
+  let key = e.value;
+  let url = 'https://www.nishita-lab.org/web-contents/jsons/hotpepper/'+key+'.json';
 
-setInterval(() => {
-  $target.addClass(CLASSNAME);
-  setTimeout(() => {
-    $target.removeClass(CLASSNAME);
-  }, TIMEOUT);
-}, TIMEOUT * 2);
+  //通信開始
+  axios.get(url)
+  .then(showResult)
+  .catch(showError)
+  .then(finish)
+}
+let ta = document.querySelector('table');
 
+//通信が成功した時の処理
+function showResult(resp){
+  //サーバから送られてきたデータを出力
+  let data = resp.data;
 
+  //dataが文字列ならオブジェクトに変換する
+  if(typeof data == 'string'){
+      data = JSON.parse(data);
+  }
 
-//検索
-let b = document.querySelector('#print');
-b.addEventListener('click', kensaku);
+  //dataをコンソールに出力
+  console.log(data);
 
-function kensaku(){
-  let i = document.querySelector('input[name="serch"]');
-	let serch = i.value;
+  //data.xを出力
+  for(let n of data.results.shop){
+      console.log(n.name);
+      let p = document.createElement('p');
+      p.textContent = n.name;
+      ta.insertAdjacentElement('afterend',p);
+      z++;
+  }
 }
 
-/////////// 課題3-2 ここからプログラムを書こう
-for(let n of data.results.shop){
-  console.log(n.name);
+//通信エラーが発生した時の処理
+function showError(err){
+  console.log(err);
+}
+
+//通信の最後に毎回実行する処理
+function finish(){
+  console.log('Ajax通信が終わりました');
 }
